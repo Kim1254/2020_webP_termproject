@@ -19,33 +19,17 @@
 
     <!-- Responsive CSS -->
     <link href="css/responsive/responsive.css" rel="stylesheet">
-	
-	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="js/custom.js"></script>
 	<script>
-		var set = [null, null];
-		
+		var curtype = null;
 		var spl = location.href.split("?")[1];
-		if (spl)
-		{
-			var spll = spl.split("&");
-			set[0] = parseInt(spll[0].split("=")[1]);
-			set[1] = parseInt(spll[1].split("=")[1]);
-			
-			if (set[0])
-			{
-				map_y = district_points[set[0] - 1][0];
-				map_x = district_points[set[0] - 1][1];
-				map_title = districts[set[0] - 1];
-				map_target = "exploreGoogleMap";
-			}
-		}
 		
+		if (spl)
+			curtype = parseInt(spl.split("=")[1]);
 	</script>
-
 </head>
 
-<body onload="initializeMap()">
+<body>
     <!-- Preloader -->
     <div id="preloader">
         <div class="dorne-load"></div>
@@ -59,7 +43,7 @@
                     <div class="search-close-btn" id="closeBtn">
                         <i class="pe-7s-close-circle" aria-hidden="true"></i>
                     </div>
-                    <form action="search.html" method="get">
+                    <form action="#" method="get">
                         <input type="search" name="caviarSearch" id="search" placeholder="Search Your Desire Destinations">
                         <input type="submit" class="d-none" value="submit">
                     </form>
@@ -109,138 +93,64 @@
     <!-- ***** Header Area End ***** -->
 
     <!-- ***** Breadcumb Area Start ***** -->
-    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/hero-1.jpg)">
-    </div>
+    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/hero-1.jpg)"></div>
     <!-- ***** Breadcumb Area End ***** -->
 
-    <!-- Explore Area -->
-    <section class="dorne-explore-area d-md-flex">
-        <!-- Explore Search Area -->
-        <div class="explore-search-area d-md-flex">
-            <!-- Explore Search Form -->
-            <div class="explore-search-form">
-                <h6>What are you looking for?</h6>
-                <!-- Tabs Content -->
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-places" role="tabpanel" aria-labelledby="nav-places-tab">
-                        <form action="explore.html" method="get">
-							<script>
-								document.write("<select class=\"custom-select\" name=\"dis\">");
-								if (set[0])
-								{
-									document.write("<option value=\"\">Districts</option>");
-									for (var i = 1; i <= districts.length; i++)
-									{
-										document.write("<option value=\"" + i + "\"");
-										
-										if (i == set[0])
-										{
-											document.write(" selected");
-										}
-										document.write(">" + districts[i - 1] + "</option>");
-									}
-								}
-								else
-								{
-									document.write("<option value=\"\" selected>Districts</option>");
-									for (var i = 1; i <= districts.length; i++)
-									{
-										document.write("<option value=\"" + i + "\">" + districts[i - 1] + "</option>");
-									}
-								}
-								
-								document.write("</select>");
-								
-								document.write("<select class=\"custom-select\" name=\"type\">");
-								
-								if (set[1])
-								{
-									document.write("<option value=\"\">Place types</option>");
-									for (var i = 1; i <= types.length; i++)
-									{
-										document.write("<option value=\"" + i + "\"");
-										
-										if (i == set[1])
-										{
-											document.write(" selected");
-										}
-										document.write(">" + types[i - 1] + "</option>");
-									}
-								}
-								else
-								{
-									document.write("<option value=\"\" selected>Place types</option>");
-									for (var i = 1; i <= types.length; i++)
-									{
-										document.write("<option value=\"" + i + "\">" + types[i - 1] + "</option>");
-									}
-								}
-								
-								document.write("</select>");
-								document.write("<button type=\"submit\" class=\"btn dorne-btn mt-50 bg-white text-dark\"><i class=\"fa fa-search pr-2\" aria-hidden=\"true\"></i> Search</button>");
-							</script>
-                        </form>
+    <!-- ***** Listing Destinations Area Start ***** -->
+    <section class="dorne-listing-destinations-area section-padding-100-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading dark text-center">
+                        <span></span>
+						<script>
+						
+						if (types[curtype])
+						{
+							document.write("<h4>" + types[curtype] + "</h4>");
+							document.write("<h4>Featured destinations</h4>");
+							document.write("<p>Our Team’s pick</p>");
+						}
+						else
+						{
+							document.write("<h4>Oops!</h4>");
+							document.write("<p>This's wrong enterance!</p><br>");
+							document.write("<a href=\"index.html\"><p>→ Go Home</p></a>");
+						}
+						
+						</script>
                     </div>
                 </div>
             </div>
-            
-            <!-- Explore Search Result -->
-            <div class="explore-search-result">
+            <div class="row">
+                <!-- Single Features Area -->
 				<script>
-					if (set[0] || set[1])
-					{
-						var vDraw = false;
-						for (var i = 0; i < places.length; i++)
-						{
-							if (set[0])
-							{
-								if (districts[set[0] - 1] != places[i].district)
-									continue;
-							}
-							if (set[1])
-							{
-								if (types_real[set[1] - 1] != places[i].group)
-									continue;
-							}
-							
-							document.write("<div onclick=\"on_click_place('" + i + "')\" class=\"single-features-area\">");
-							document.write("<img src=\"" + slot_img[i] + "\" alt=\"\">");
-							document.write("<div class=\"feature-content d-flex align-items-center justify-content-between\">");
-							document.write(" <div class=\"feature-title\">");
-							document.write("<h5>" + places[i].name + "</h5>");
-							document.write("<p>" + places[i].district + "</p><br>");
-							document.write("<p>" + type_to_real(places[i].group) + "</p>");
-							document.write("</div>");
-							document.write("<div class=\"feature-favourite\">");
-							document.write("<a href=\"#\"><i class=\"fa fa-heart-o\" aria-hidden=\"true\"></i></a>");
-							document.write("</div>");
-							document.write("</div>");
-							document.write("</div>");
-							
-							vDraw = true;
-						}
-						
-						if (!vDraw)
-						{
-							document.write("<div class=\"text-center\">");
-							document.write("<br><h4>Oops!</h4>");
-							document.write("<p>There is no place matching those conditions!</p></div>");
-						}
-					}
-					else
-					{
-						document.write("<div class=\"text-center\">");
-						document.write("<br><h4>Select</h4>");
-						document.write("<p>the conditions you want to get!</p></div>");
-					}
+				
+				for (var i = 0; i < places.length; i++)
+				{
+					if (places[i].group != types_real[curtype])
+						continue;
+					
+					document.write("<div onclick=\"on_click_place('" + i + "')\" class=\"col-12 col-sm-6 col-lg-4\">");
+					document.write("<div class=\"single-features-area mb-50\">");
+					document.write("<img src=\"" + slot_img[i] + "\" alt=\"\">");
+					document.write("<div class=\"feature-content d-flex align-items-center justify-content-between\">");
+					document.write("<div class=\"feature-title\">");
+					document.write("<h5>" + places[i].name + "</h5>");
+					document.write("<p>" + places[i].district + "</p>");
+					document.write("</div>");
+					document.write("<div class=\"feature-favourite\">");
+					document.write("<a href=\"#\"><i class=\"fa fa-heart-o\" aria-hidden=\"true\"></i></a>");
+					document.write("</div>");
+					document.write("</div>");
+					document.write("</div>");
+					document.write("</div>");
+				}
 				</script>
             </div>
         </div>
-        <!-- Explore Map Area -->
-        <div class="explore-map-area">
-            <div id="exploreGoogleMap"></div>
-        </div>
     </section>
+    <!-- ***** Listing Destinations Area End ***** -->
 
     <!-- ****** Footer Area Start ****** -->
     <footer class="dorne-footer-area">

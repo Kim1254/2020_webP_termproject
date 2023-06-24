@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Dorne - Directory &amp; Listing Template | Contact</title>
+    <title>Gachon places</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -19,10 +19,18 @@
 
     <!-- Responsive CSS -->
     <link href="css/responsive/responsive.css" rel="stylesheet">
-
+	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script src="js/custom.js"></script>
+	<script>
+		map_y = 37.450710;
+		map_x = 127.128858;
+		map_title = "Gachon UniverSity";
+		map_string = "<h4>Gachon University</h4><p>A University in Sungnam.</p>"
+		map_target = "googleMap";
+	</script>
 </head>
 
-<body>
+<body onload="initializeMap()">
     <!-- Preloader -->
     <div id="preloader">
         <div class="dorne-load"></div>
@@ -36,8 +44,8 @@
                     <div class="search-close-btn" id="closeBtn">
                         <i class="pe-7s-close-circle" aria-hidden="true"></i>
                     </div>
-                    <form action="#" method="get">
-                        <input type="search" name="caviarSearch" id="search" placeholder="Search Your Desire Destinations or Events">
+                    <form action="search.html" method="get">
+                        <input type="search" name="caviarSearch" id="search" placeholder="Search Your Desire Destinations">
                         <input type="submit" class="d-none" value="submit">
                     </form>
                 </div>
@@ -59,25 +67,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="index.html">Home</a>
-                                        <a class="dropdown-item" href="explore.html">Explore</a>
-                                        <a class="dropdown-item" href="listing.html">Listing</a>
-                                        <a class="dropdown-item" href="single-listing.html">Single Listing</a>
-                                        <a class="dropdown-item" href="contact.html">Contact</a>
-                                    </div>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="explore.html">Explore</a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Listings <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                                        <a class="dropdown-item" href="index.html">Home</a>
-                                        <a class="dropdown-item" href="explore.html">Explore</a>
-                                        <a class="dropdown-item" href="listing.html">Listing</a>
-                                        <a class="dropdown-item" href="single-listing.html">Single Listing</a>
-                                        <a class="dropdown-item" href="contact.html">Contact</a>
-                                    </div>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="listing.html">Listing</a>
                                 </li>
                                 <li class="nav-item active">
                                     <a class="nav-link" href="contact.html">Contact</a>
@@ -87,13 +81,9 @@
                             <div class="dorne-search-btn">
                                 <a id="search-btn" href="#"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
                             </div>
-                            <!-- Signin btn -->
-                            <div class="dorne-signin-btn">
-                                <a href="#">Sign in  or Register</a>
-                            </div>
                             <!-- Add listings btn -->
                             <div class="dorne-add-listings-btn">
-                                <a href="#" class="btn dorne-btn">+ Add Listings</a>
+                                <a href="addlistening.html" class="btn dorne-btn">+ Add Listings</a>
                             </div>
                         </div>
                     </nav>
@@ -114,15 +104,15 @@
         <div class="contact-form-area equal-height">
             <div class="contact-text">
                 <h4>Hello, Get in touch with us</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac nibh sed mi ullamcorper rhoncus. Curabitur pulvinar vel augue sit amet vestibulum. Proin tempus lacus porta lorem blandit aliquam eget quis ipsum. Vivamus accumsan consequat ligula non volutpat. Sed mollis orci non cursus vestibulum. Pellentesque vitae est a augue laoreet venenatis sed eu felis. Sed cursus magna nec turpis ullamcorper, eget rutrum felis egestas. Nunc odio ex, fermentum efficitur nunc vitae, efficitur hendrerit diam. Lorem ipsum dolor sit amet, consectetur.</p>
+                <p>If you want to contact with me, please use below form.<br>If that from does not working, use below e-mails, phone numbers to contact.<br>Thank you.</p>
                 <div class="contact-info d-lg-flex">
                     <div class="single-contact-info">
-                        <h6><i class="fa fa-map-signs" aria-hidden="true"></i> Main Avenue Soho, NY</h6>
-                        <h6><i class="fa fa-map-signs" aria-hidden="true"></i> No. 25-33</h6>
+                        <h6><i class="fa fa-map-signs" aria-hidden="true"></i> SungNameDaeRo, GyeongGi Do</h6>
+                        <h6><i class="fa fa-map-signs" aria-hidden="true"></i> No. 1342</h6>
                     </div>
                     <div class="single-contact-info">
-                        <h6><i class="fa fa-envelope-o" aria-hidden="true"></i> contact@yourbusiness.com</h6>
-                        <h6><i class="fa fa-phone" aria-hidden="true"></i> +34 567 22478 49567</h6>
+                        <h6><i class="fa fa-envelope-o" aria-hidden="true"></i> gcckim@gc.gachon.ac.kr</h6>
+                        <h6><i class="fa fa-phone" aria-hidden="true"></i> +82(031) 750-8659</h6>
                     </div>
                 </div>
             </div>
@@ -153,7 +143,8 @@
         </div>
         <!-- Map Area -->
         <div class="dorne-map-area equal-height">
-            <div id="googleMap"></div>
+            <div id="googleMap">
+			</div>
         </div>
     </div>
     <!-- ***** Contact Area End ***** -->
@@ -166,16 +157,15 @@
                     <div class="footer-text">
                         <p>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+							Web Programming &copy; 2020 <a class="link color-3" href="#">Privacy Policy</a> | <a rel="nofollow" target="_blank" href="http://gcckim.dothome.co.kr/">Website</a> by Team 2 | <a rel="nofollow" target="_blank" href="http://gcckim.dothome.co.kr/">gcckim.dothome.co.kr</a><br/>
+							This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>
                     <div class="footer-social-btns">
-                        <a href="#"><i class="fa fa-linkedin" aria-haspopup="true"></i></a>
-                        <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
-                        <a href="#"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
+                        <a href="https://www.instagram.com/"><i class="fa fa-linkedin" aria-haspopup="true"></i></a>
+                        <a href="http://twitter.com"><i class="fa fa-twitter" aria-haspopup="true"></i></a>
+                        <a href="http://www.facebook.com/"><i class="fa fa-facebook" aria-haspopup="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -185,15 +175,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <!-- jQuery-2.2.4 js -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap-4 js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
     <script src="js/others/plugins.js"></script>
-    <!-- Google Maps js -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk9KNSL1jTv4MY9Pza6w8DJkpI_nHyCnk"></script>
-    <script src="js/google-map/map-active.js"></script>
     <!-- Active JS -->
     <script src="js/active.js"></script>
 </body>

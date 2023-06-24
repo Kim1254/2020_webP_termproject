@@ -28,7 +28,7 @@
 
 #preloader {
     overflow: hidden;
-    background-color: rgba(52, 26, 121, 0.99);
+    background-color: rgba(18, 69, 171, 0.99);
     height: 100%;
     left: 0;
     position: fixed;
@@ -294,7 +294,7 @@ li {
 }
 
 .section-heading.dark span {
-    background-color: #7643ea;
+    background-color: #1245ab;
 }
 
 .section-heading.dark h4 {
@@ -357,7 +357,7 @@ li {
 .dorne-btn {
     min-width: 180px;
     height: 52px;
-    background-color: #7643ea;
+    background-color: #6799FF;
     border-radius: 0;
     padding: 0 15px;
     line-height: 50px;
@@ -371,7 +371,7 @@ li {
 .dorne-btn:hover,
 .dorne-btn:focus {
     color: #fff;
-    background-color: #5d25dd;
+    background-color: #3567CD;
     font-weight: 600;
 }
 
@@ -459,7 +459,7 @@ li {
 }
 
 .sticky .header_area {
-    background-color: rgba(14, 2, 35, 0.9);
+    background-color: rgba(3, 0, 102, 0.9);
     height: 80px;
     z-index: 9999;
     border-bottom: 1px solid transparent;
@@ -487,7 +487,7 @@ li {
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-item.active .nav-link {
-    color: #7643ea;
+    color: #6799FF;
 }
 
 .dorne-search-btn > a,
@@ -512,7 +512,7 @@ li {
 }
 
 .dropdown-item:hover {
-    background-color: #7643ea;
+    background-color: #6799ff;
     color: #fff;
 }
 
@@ -568,13 +568,13 @@ li {
 
 .hero-search-form .nav-tabs .nav-link.active {
     color: #fff;
-    background-color: rgba(67, 25, 161, 0.65);
+    background-color: rgba(103, 153, 255, 0.9);
     border-color: transparent;
 }
 
 .hero-search-form .tab-content .tab-pane {
     padding: 35px;
-    background-color: rgba(67, 25, 161, 0.65);
+    background-color: rgba(103, 153, 255, 0.65);
 }
 
 .hero-search-form .tab-content .tab-pane h6 {
@@ -648,7 +648,7 @@ li {
 }
 
 .single-catagory-area {
-    background-color: #7643ea;
+    background-color: #6799FF;
     text-align: center;
     padding: 60px 15px;
     -webkit-transition-duration: 500ms;
@@ -684,7 +684,7 @@ li {
 }
 
 .about-content span {
-    color: #7643ea;
+    color: #1245ab;
 }
 
 .about-content p {
@@ -705,7 +705,7 @@ li {
     height: 70px;
     display: inline-block;
     line-height: 70px;
-    background-color: #7643ea;
+    background-color: #1245ab;
     padding: 0 50px;
     font-size: 14px;
     text-transform: uppercase;
@@ -759,7 +759,7 @@ li {
     position: absolute;
     top: 20px;
     left: 20px;
-    background-color: #7643ea;
+    background-color: #1245ab;
     height: 35px;
     font-size: 12px;
     line-height: 35px;
@@ -796,7 +796,7 @@ li {
 }
 
 .single-features-area:hover {
-    background-color: #7643ea;
+    background-color: #1245ab;
     box-shadow: 3px 15px 30px rgba(0, 0, 0, 0.15);
 }
 
@@ -813,7 +813,7 @@ li {
     color: #fff;
     height: 70px;
     line-height: 70px;
-    background-color: #7643ea;
+    background-color: #1243ab;
 }
 
 .ratings-map-area > a:last-child {
@@ -840,117 +840,6 @@ li {
 
 .single-features-area:hover .ratings-map-area > a:last-child {
     background-color: #30c0a3;
-}
-
-/* Feature Events Area CSS */
-
-.single-feature-events-area {
-    position: relative;
-    z-index: 1;
-    background-color: #fff;
-    margin-bottom: 50px;
-    -webkit-transition-duration: 500ms;
-            transition-duration: 500ms;
-}
-
-.single-feature-events-area .feature-events-thumb {
-    position: relative;
-    z-index: 1;
-}
-
-.date-map-area {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 9;
-}
-
-.date-map-area > a {
-    padding: 8px 15px;
-    font-size: 12px;
-    width: 65px;
-    font-weight: 800;
-    color: #fff;
-    height: 50px;
-    background-color: #7643ea;
-    text-align: center;
-}
-
-.date-map-area > a:last-child {
-    background-color: #30c0a3;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-transition-duration: 500ms;
-            transition-duration: 500ms;
-}
-
-.feature-events-thumb {
-    width: 170px;
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 170px;
-            flex: 0 0 170px;
-}
-
-.feature-events-content {
-    position: relative;
-    z-index: 2;
-    padding: 0 15% 0 15px;
-}
-
-.feature-events-details-btn > a {
-    width: 65px;
-    height: 50px;
-    background-color: #2a2a2a;
-    display: block;
-    font-size: 24px;
-    color: #fff;
-    line-height: 50px;
-    text-align: center;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: 99
-}
-
-.feature-events-content h5 {
-    font-size: 18px;
-    text-transform: uppercase;
-    font-weight: 800;
-    margin-bottom: 5px;
-    -webkit-transition-duration: 500ms;
-            transition-duration: 500ms;
-}
-
-.feature-events-content h6 {
-    font-size: 14px;
-    font-weight: 400;
-    color: #bfb1de;
-    margin-bottom: 15px;
-    -webkit-transition-duration: 500ms;
-            transition-duration: 500ms;
-}
-
-.feature-events-content p {
-    font-size: 14px;
-    -webkit-transition-duration: 500ms;
-            transition-duration: 500ms;
-    margin-bottom: 0;
-}
-
-.single-feature-events-area:hover {
-    background-color: #7643ea;
-}
-
-.single-feature-events-area:hover .feature-events-content h5,
-.single-feature-events-area:hover .feature-events-content p {
-    color: #fff;
 }
 
 /* Footer Area CSS */
@@ -1078,7 +967,7 @@ li {
 }
 
 .explore-search-form {
-    background-color: #7643ea;
+    background-color: #1245ab;
     padding: 50px 40px;
 }
 
@@ -1111,7 +1000,7 @@ li {
 
 .explore-search-form .nav-tabs .nav-link.active {
     color: #fff;
-    background-color: rgba(67, 25, 161, 0.65);
+    background-color: rgba(103, 153, 255, 0.65);
     border-color: transparent;
 }
 

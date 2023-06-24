@@ -19,33 +19,10 @@
 
     <!-- Responsive CSS -->
     <link href="css/responsive/responsive.css" rel="stylesheet">
-	
-	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-	<script src="js/custom.js"></script>
-	<script>
-		var set = [null, null];
-		
-		var spl = location.href.split("?")[1];
-		if (spl)
-		{
-			var spll = spl.split("&");
-			set[0] = parseInt(spll[0].split("=")[1]);
-			set[1] = parseInt(spll[1].split("=")[1]);
-			
-			if (set[0])
-			{
-				map_y = district_points[set[0] - 1][0];
-				map_x = district_points[set[0] - 1][1];
-				map_title = districts[set[0] - 1];
-				map_target = "exploreGoogleMap";
-			}
-		}
-		
-	</script>
 
 </head>
 
-<body onload="initializeMap()">
+<body>
     <!-- Preloader -->
     <div id="preloader">
         <div class="dorne-load"></div>
@@ -82,23 +59,19 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                                 </li>
-                                <li class="nav-item active">
+                                <li class="nav-item">
                                     <a class="nav-link" href="explore.html">Explore</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="listing.html">Listing</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item active">
                                     <a class="nav-link" href="contact.html">Contact</a>
                                 </li>
                             </ul>
                             <!-- Search btn -->
                             <div class="dorne-search-btn">
                                 <a id="search-btn" href="#"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
-                            </div>
-                            <!-- Add listings btn -->
-                            <div class="dorne-add-listings-btn">
-                                <a href="addlistening.html" class="btn dorne-btn">+ Add Listings</a>
                             </div>
                         </div>
                     </nav>
@@ -113,134 +86,11 @@
     </div>
     <!-- ***** Breadcumb Area End ***** -->
 
-    <!-- Explore Area -->
-    <section class="dorne-explore-area d-md-flex">
-        <!-- Explore Search Area -->
-        <div class="explore-search-area d-md-flex">
-            <!-- Explore Search Form -->
-            <div class="explore-search-form">
-                <h6>What are you looking for?</h6>
-                <!-- Tabs Content -->
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-places" role="tabpanel" aria-labelledby="nav-places-tab">
-                        <form action="explore.html" method="get">
-							<script>
-								document.write("<select class=\"custom-select\" name=\"dis\">");
-								if (set[0])
-								{
-									document.write("<option value=\"\">Districts</option>");
-									for (var i = 1; i <= districts.length; i++)
-									{
-										document.write("<option value=\"" + i + "\"");
-										
-										if (i == set[0])
-										{
-											document.write(" selected");
-										}
-										document.write(">" + districts[i - 1] + "</option>");
-									}
-								}
-								else
-								{
-									document.write("<option value=\"\" selected>Districts</option>");
-									for (var i = 1; i <= districts.length; i++)
-									{
-										document.write("<option value=\"" + i + "\">" + districts[i - 1] + "</option>");
-									}
-								}
-								
-								document.write("</select>");
-								
-								document.write("<select class=\"custom-select\" name=\"type\">");
-								
-								if (set[1])
-								{
-									document.write("<option value=\"\">Place types</option>");
-									for (var i = 1; i <= types.length; i++)
-									{
-										document.write("<option value=\"" + i + "\"");
-										
-										if (i == set[1])
-										{
-											document.write(" selected");
-										}
-										document.write(">" + types[i - 1] + "</option>");
-									}
-								}
-								else
-								{
-									document.write("<option value=\"\" selected>Place types</option>");
-									for (var i = 1; i <= types.length; i++)
-									{
-										document.write("<option value=\"" + i + "\">" + types[i - 1] + "</option>");
-									}
-								}
-								
-								document.write("</select>");
-								document.write("<button type=\"submit\" class=\"btn dorne-btn mt-50 bg-white text-dark\"><i class=\"fa fa-search pr-2\" aria-hidden=\"true\"></i> Search</button>");
-							</script>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Explore Search Result -->
-            <div class="explore-search-result">
-				<script>
-					if (set[0] || set[1])
-					{
-						var vDraw = false;
-						for (var i = 0; i < places.length; i++)
-						{
-							if (set[0])
-							{
-								if (districts[set[0] - 1] != places[i].district)
-									continue;
-							}
-							if (set[1])
-							{
-								if (types_real[set[1] - 1] != places[i].group)
-									continue;
-							}
-							
-							document.write("<div onclick=\"on_click_place('" + i + "')\" class=\"single-features-area\">");
-							document.write("<img src=\"" + slot_img[i] + "\" alt=\"\">");
-							document.write("<div class=\"feature-content d-flex align-items-center justify-content-between\">");
-							document.write(" <div class=\"feature-title\">");
-							document.write("<h5>" + places[i].name + "</h5>");
-							document.write("<p>" + places[i].district + "</p><br>");
-							document.write("<p>" + type_to_real(places[i].group) + "</p>");
-							document.write("</div>");
-							document.write("<div class=\"feature-favourite\">");
-							document.write("<a href=\"#\"><i class=\"fa fa-heart-o\" aria-hidden=\"true\"></i></a>");
-							document.write("</div>");
-							document.write("</div>");
-							document.write("</div>");
-							
-							vDraw = true;
-						}
-						
-						if (!vDraw)
-						{
-							document.write("<div class=\"text-center\">");
-							document.write("<br><h4>Oops!</h4>");
-							document.write("<p>There is no place matching those conditions!</p></div>");
-						}
-					}
-					else
-					{
-						document.write("<div class=\"text-center\">");
-						document.write("<br><h4>Select</h4>");
-						document.write("<p>the conditions you want to get!</p></div>");
-					}
-				</script>
-            </div>
-        </div>
-        <!-- Explore Map Area -->
-        <div class="explore-map-area">
-            <div id="exploreGoogleMap"></div>
-        </div>
-    </section>
+	<!-- Custom area Start -->
+	<div class="text-center">
+		<iframe border="none" width="90%" height="700px" src="http://gcckim.dothome.co.kr/Listening"></iframe>
+	</div>
+	<!-- Custom area End -->
 
     <!-- ****** Footer Area Start ****** -->
     <footer class="dorne-footer-area">

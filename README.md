@@ -12,3 +12,18 @@
    - [FontAwesome](https://fontawesome.com/)
    - [Owl Carousel](https://owlcarousel2.github.io/OwlCarousel2/)
    - [jQuery 2.2.4](https://jquery.com/)
+   
+***
+
+> ## Modification
+
+- ### TODO
+   - A recommendation website for Gachon University (restaurant, leisure, etc.)
+
+- ### Functionality
+   - Infomation for places
+   - Random recommendation
+
+- ### Resources
+   - Images for places
+   - Images related with Gachon University

@@ -20,32 +20,18 @@
     <!-- Responsive CSS -->
     <link href="css/responsive/responsive.css" rel="stylesheet">
 	
-	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="js/custom.js"></script>
 	<script>
-		var set = [null, null];
+		var keyword = null;
+		var spl = location.href.split("?");
 		
-		var spl = location.href.split("?")[1];
 		if (spl)
-		{
-			var spll = spl.split("&");
-			set[0] = parseInt(spll[0].split("=")[1]);
-			set[1] = parseInt(spll[1].split("=")[1]);
-			
-			if (set[0])
-			{
-				map_y = district_points[set[0] - 1][0];
-				map_x = district_points[set[0] - 1][1];
-				map_title = districts[set[0] - 1];
-				map_target = "exploreGoogleMap";
-			}
-		}
-		
+			keyword = spl[1].split("=")[1];
 	</script>
 
 </head>
 
-<body onload="initializeMap()">
+<body>
     <!-- Preloader -->
     <div id="preloader">
         <div class="dorne-load"></div>
@@ -82,10 +68,10 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                                 </li>
-                                <li class="nav-item active">
+                                <li class="nav-item">
                                     <a class="nav-link" href="explore.html">Explore</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item active">
                                     <a class="nav-link" href="listing.html">Listing</a>
                                 </li>
                                 <li class="nav-item">
@@ -109,138 +95,162 @@
     <!-- ***** Header Area End ***** -->
 
     <!-- ***** Breadcumb Area Start ***** -->
-    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/hero-1.jpg)">
-    </div>
+    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/hero-1.jpg)"></div>
     <!-- ***** Breadcumb Area End ***** -->
 
-    <!-- Explore Area -->
-    <section class="dorne-explore-area d-md-flex">
-        <!-- Explore Search Area -->
-        <div class="explore-search-area d-md-flex">
-            <!-- Explore Search Form -->
-            <div class="explore-search-form">
-                <h6>What are you looking for?</h6>
-                <!-- Tabs Content -->
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-places" role="tabpanel" aria-labelledby="nav-places-tab">
-                        <form action="explore.html" method="get">
-							<script>
-								document.write("<select class=\"custom-select\" name=\"dis\">");
-								if (set[0])
-								{
-									document.write("<option value=\"\">Districts</option>");
-									for (var i = 1; i <= districts.length; i++)
-									{
-										document.write("<option value=\"" + i + "\"");
-										
-										if (i == set[0])
-										{
-											document.write(" selected");
-										}
-										document.write(">" + districts[i - 1] + "</option>");
-									}
-								}
-								else
-								{
-									document.write("<option value=\"\" selected>Districts</option>");
-									for (var i = 1; i <= districts.length; i++)
-									{
-										document.write("<option value=\"" + i + "\">" + districts[i - 1] + "</option>");
-									}
-								}
-								
-								document.write("</select>");
-								
-								document.write("<select class=\"custom-select\" name=\"type\">");
-								
-								if (set[1])
-								{
-									document.write("<option value=\"\">Place types</option>");
-									for (var i = 1; i <= types.length; i++)
-									{
-										document.write("<option value=\"" + i + "\"");
-										
-										if (i == set[1])
-										{
-											document.write(" selected");
-										}
-										document.write(">" + types[i - 1] + "</option>");
-									}
-								}
-								else
-								{
-									document.write("<option value=\"\" selected>Place types</option>");
-									for (var i = 1; i <= types.length; i++)
-									{
-										document.write("<option value=\"" + i + "\">" + types[i - 1] + "</option>");
-									}
-								}
-								
-								document.write("</select>");
-								document.write("<button type=\"submit\" class=\"btn dorne-btn mt-50 bg-white text-dark\"><i class=\"fa fa-search pr-2\" aria-hidden=\"true\"></i> Search</button>");
-							</script>
-                        </form>
+    <!-- ***** Listing Destinations Area Start ***** -->
+    <section class="dorne-listing-destinations-area section-padding-100-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading dark text-center">
+                        <span></span>
+                        <h4>Search result: </h4>
                     </div>
                 </div>
             </div>
-            
-            <!-- Explore Search Result -->
-            <div class="explore-search-result">
-				<script>
-					if (set[0] || set[1])
+			<script>
+				var draw = false;
+				var noresult = true;
+				
+				if (keyword.length)
+				{
+					var keyword_up = keyword.toUpperCase();
+					
+					for (var i = 0; i < districts.length; i++)
 					{
-						var vDraw = false;
-						for (var i = 0; i < places.length; i++)
+						if (districts[i].toUpperCase().indexOf(keyword_up) != -1)
 						{
-							if (set[0])
+							draw = false;
+							for (var j = 0; j < places.length; j++)
 							{
-								if (districts[set[0] - 1] != places[i].district)
+								if (places[j].district != districts[i])
 									continue;
-							}
-							if (set[1])
-							{
-								if (types_real[set[1] - 1] != places[i].group)
-									continue;
+								
+								if (!draw)
+								{
+									document.write("<div class=\"text-center\">");
+									document.write("<h4>Do you mean: ", districts[i] + "?</h4><br></div>");
+									document.write("<div class=\"row\">");
+									draw = true;
+								}
+								
+								document.write("<div onclick=\"on_click_place('" + j + "')\" class=\"col-12 col-sm-6 col-lg-4\">");
+								document.write("<div class=\"single-features-area mb-50\">");
+								
+								document.write("<img src=\"" + slot_img[j] + "\" alt=\"\">");
+								document.write("<div class=\"feature-content d-flex align-items-center justify-content-between\">");
+								document.write("<div class=\"feature-title\">");
+								document.write("<h5>" + places[j].name + "</h5>");
+								document.write("<p>" + type_to_real(places[j].group) + "</p><br>");
+								document.write("<p>" + places[j].district + "</p>");
+								document.write("</div>");
+								document.write("<div class=\"feature-favourite\">");
+								document.write("<a href=\"#\"><i class=\"fa fa-heart-o\" aria-hidden=\"true\"></i></a>");
+								document.write("</div>");
+								document.write("</div>");
+								document.write("</div>");
+								document.write("</div>");
+								noresult = false;
 							}
 							
-							document.write("<div onclick=\"on_click_place('" + i + "')\" class=\"single-features-area\">");
+							if (draw)
+								document.write("</div>");
+						}
+					}
+					
+					for (var i = 0; i < types.length; i++)
+					{
+						if (types[i].toUpperCase().indexOf(keyword_up) != -1)
+						{
+							draw = false;
+							
+							for (var j = 0; j < places.length; j++)
+							{
+								if (places[j].group != types_real[i])
+									continue;
+								
+								if (!draw)
+								{
+									document.write("<div class=\"text-center\">");
+									document.write("<h4>Do you mean: ", types[i] + "?</h4><br></div>");
+									document.write("<div class=\"row\">");
+									draw = true;
+								}
+								
+								document.write("<div onclick=\"on_click_place('" + j + "')\" class=\"col-12 col-sm-6 col-lg-4\">");
+								document.write("<div class=\"single-features-area mb-50\">");
+								
+								document.write("<img src=\"" + slot_img[j] + "\" alt=\"\">");
+								document.write("<div class=\"feature-content d-flex align-items-center justify-content-between\">");
+								document.write("<div class=\"feature-title\">");
+								document.write("<h5>" + places[j].name + "</h5>");
+								document.write("<p>" + types[i] + "</p><br>");
+								document.write("<p>" + places[j].district + "</p>");
+								document.write("</div>");
+								document.write("<div class=\"feature-favourite\">");
+								document.write("<a href=\"#\"><i class=\"fa fa-heart-o\" aria-hidden=\"true\"></i></a>");
+								document.write("</div>");
+								document.write("</div>");
+								document.write("</div>");
+								document.write("</div>");
+								noresult = false;
+							}
+							
+							if (draw)
+								document.write("</div>");
+						}
+					}
+					
+					draw = false;
+					
+					for (var i = 0; i < places.length; i++)
+					{
+						if (places[i].name.toUpperCase().indexOf(keyword_up) != -1)
+						{
+							if (!draw)
+							{
+								document.write("<div class=\"text-center\">");
+								document.write("<h4>Search results by name:</h4><br></div>");
+								document.write("<div class=\"row\">");
+								draw = true;
+							}
+							
+							document.write("<div onclick=\"on_click_place('" + i + "')\" class=\"col-12 col-sm-6 col-lg-4\">");
+							document.write("<div class=\"single-features-area mb-50\">");
+							
 							document.write("<img src=\"" + slot_img[i] + "\" alt=\"\">");
 							document.write("<div class=\"feature-content d-flex align-items-center justify-content-between\">");
-							document.write(" <div class=\"feature-title\">");
+							document.write("<div class=\"feature-title\">");
 							document.write("<h5>" + places[i].name + "</h5>");
-							document.write("<p>" + places[i].district + "</p><br>");
-							document.write("<p>" + type_to_real(places[i].group) + "</p>");
+							document.write("<p>" + type_to_real(places[i].group) + "</p><br>");
+							document.write("<p>" + places[i].district + "</p>");
 							document.write("</div>");
 							document.write("<div class=\"feature-favourite\">");
 							document.write("<a href=\"#\"><i class=\"fa fa-heart-o\" aria-hidden=\"true\"></i></a>");
 							document.write("</div>");
 							document.write("</div>");
 							document.write("</div>");
-							
-							vDraw = true;
-						}
-						
-						if (!vDraw)
-						{
-							document.write("<div class=\"text-center\">");
-							document.write("<br><h4>Oops!</h4>");
-							document.write("<p>There is no place matching those conditions!</p></div>");
+							document.write("</div>");
+							noresult = false;
 						}
 					}
-					else
-					{
-						document.write("<div class=\"text-center\">");
-						document.write("<br><h4>Select</h4>");
-						document.write("<p>the conditions you want to get!</p></div>");
-					}
-				</script>
-            </div>
-        </div>
-        <!-- Explore Map Area -->
-        <div class="explore-map-area">
-            <div id="exploreGoogleMap"></div>
+					
+					if (draw)
+						document.write("</div>");
+				}
+				
+				if (noresult)
+				{
+					document.write("<div class=\"text-center\">");
+					document.write("<h4>No search result.</h4>");
+					document.write("<p>Please use more specific keywords or recommendation system.</p>");
+					document.write("</div>");
+				}
+			</script>
         </div>
     </section>
+    <!-- ***** Listing Destinations Area End ***** -->
 
     <!-- ****** Footer Area Start ****** -->
     <footer class="dorne-footer-area">
